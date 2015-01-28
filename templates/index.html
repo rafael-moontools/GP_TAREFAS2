@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% block title %}MOON TOOLS Tarefas{% endblock %}
+
+{% block content %}
+
+    <h1 class="div_center_content">MOON TOOLS Tarefas</h1>
+
+    {% if user and not user.is_anonymous %}
+        <p>Olá <strong>{{ user.get_full_name|default:user.username }}</strong>, bem vindo a MOON TOOLS tarefas.</p>
+        <p>Seu email é <strong>{{ user.email }}</strong></p>
+        <p>Clique para visualizar suas <a href="/tarefas/">tarefas</a></p>
+    {% else %}
+        <div class="div_center_content">
+            <p>É necessário autenticar o usuário para visualizar suas tarefas!</p>
+            <p>Clique para fazer o Login</p>
+            {% include 'google_log_in_button.html' %}
+        </div>
+    {% endif %}
+
+{% endblock %}

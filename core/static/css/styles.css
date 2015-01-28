@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: 'Microsoft Sans Serif' , Arial, Helvetica, Verdana;
+}
+
+body h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+body h2 {
+    font-weight: bold;
+}
+
+body h3 {
+    font-weight: bold;
+}
+
+IMG.center_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.cabecalho{
+    padding-top: 23px;
+    padding-bottom: 23px;
+}
+
+.div_center {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.div_center_content {
+    text-align: center;
+}
+
+.div_content {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.erro {
+    color: red;
+    display: inline;
+    padding-left: 19px;
+}
+
+.red {
+    color: red;
+}
+
+#div_user {
+    position: absolute;
+    top: 110px;
+    right: 30px;
+    font-weight: bold;
+}

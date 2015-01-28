@@ -1,0 +1,77 @@
+{% load static from staticfiles %}
+{#{% url 'social:begin' "google-oauth2" %}#}
+{#{% load backend_utils %}#}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/google_button.css" %}" />
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/spinner.css" %}" />
+
+    <link rel="icon" type="image/png" href="{% static "images/favicon.ico" %}">
+
+    <script type="text/javascript" src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+
+    {% block css %}{% endblock %}
+    {% block script %}
+        <script>
+            $().ready( function() {
+                $("#spinner").hide();
+            })
+        </script>
+    {% endblock %}
+</head>
+<body>
+    <div>
+        <div class="cabecalho">
+            <img class="center_image" src="{% static "images/moontools_logo.jpg" %}">
+        </div>
+        {% if user and not user.is_anonymous %}
+            <div id="div_user">
+                <label>{{ user.first_name|default:"Not provided" }} {{ user.last_name|default:"Not provided" }}</label><br />
+                <label>{{ user.email }}</label>
+            </div>
+        {% endif %}
+
+
+        {# SPINNER #}
+        <div id="spinner" class="spinner">
+              <div class="spinner-container container1">
+                    <div class="circle1"></div>
+                    <div class="circle2"></div>
+                    <div class="circle3"></div>
+                    <div class="circle4"></div>
+              </div>
+              <div class="spinner-container container2">
+                    <div class="circle1"></div>
+                    <div class="circle2"></div>
+                    <div class="circle3"></div>
+                    <div class="circle4"></div>
+              </div>
+              <div class="spinner-container container3">
+                    <div class="circle1"></div>
+                    <div class="circle2"></div>
+                    <div class="circle3"></div>
+                    <div class="circle4"></div>
+              </div>
+        </div>
+
+        <div id="div_content" class="div_content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <script>
+        $("form").submit(function(){
+            $("#spinner").show();
+            $("#div_content").hide();
+        })
+    </script>
+</body>
+</html>
