@@ -177,7 +177,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
 
     # Custom pipeline
-    'core.pipeline.teste_de_pipeline',
+    'profiles.pipeline.atualiza_user_profile',
 )
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'

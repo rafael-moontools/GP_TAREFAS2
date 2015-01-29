@@ -2,7 +2,7 @@
 from profiles.models import UserProfile
 
 # def create_UserProfile(sender, details, response, user, *args, **kwargs):
-def teste_de_pipeline(response, user, **kwargs):
+def atualiza_user_profile(response, user, **kwargs):
     try:
         profile_picture = response.get('image')['url']
 
