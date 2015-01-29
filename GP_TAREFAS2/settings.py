@@ -29,11 +29,13 @@ TEMPLATE_DEBUG = DEBUG
 # os.path.dirname(os.path.dirname(__file__))
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '.herokuapp.com']
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
+# ADMINS = (
+#     ('Your Name', 'your_email@example.com'),
+# )
+#
+# MANAGERS = ADMINS
+#
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 
 # Application definition
@@ -45,7 +47,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'south',
     'core',
+    'profiles',
     'social.apps.django_app.default',
 )
 
@@ -99,9 +103,8 @@ LOGIN_REDIRECT_URL = '/members/'
 LOGIN_ERROR_URL = '/login-error/'
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.google.GoogleOpenId',
+    'django.contrib.auth.backends.ModelBackend',
     'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOAuth',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -156,8 +159,6 @@ SOCIAL_AUTH_PIPELINE = (
     # Disabled by default.
     # 'example.app.pipeline.require_email',
 
-    'core.pipeline.meu_pipeline',
-
     'social.pipeline.mail.mail_validation',
 
     # Create a user account if we haven't found one yet.
@@ -174,6 +175,9 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Update the user record with any changed info from the auth service.
     'social.pipeline.user.user_details',
+
+    # Custom pipeline
+    'core.pipeline.teste_de_pipeline',
 )
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
@@ -183,5 +187,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_OAUTH2_CLIENT_SECRET')
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-AUTH_USER_MODEL='core.UserProfile'
+# AUTH_USER_MODEL = 'core.Profiles'
 # AUTH_PROFILE_MODULE = 'core.UserProfile'
+# SOCIAL_AUTH_USER_MODEL = 'core.UserProfile'

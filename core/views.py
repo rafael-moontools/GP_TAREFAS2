@@ -8,6 +8,7 @@ from social.backends.oauth import BaseOAuth1, BaseOAuth2
 from social.backends.google import GooglePlusAuth
 from social.backends.utils import load_backends
 from social.apps.django_app.utils import psa
+from profiles.models import UserProfile
 
 
 
@@ -30,7 +31,7 @@ def home(request):
     })
 
     if request.user.is_authenticated():
-        print request.session.get('email')
+        print request.user.userprofile.getProfilePicture()
 
     # print request.user['image']['url']
     return render(request, 'index.html', context_instance=userContext)

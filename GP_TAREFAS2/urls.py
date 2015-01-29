@@ -10,6 +10,7 @@ urlpatterns = patterns('core.views',
     url(r'^logout/$', 'logout', name='logout'),
 
     url(r'^tarefas/$', 'tarefas', name='tarefas'),
+    url(r'^file_upload/$', 'file_upload', name='file_upload'),
 
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', include(admin.site.urls)),

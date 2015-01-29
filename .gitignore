@@ -15,3 +15,4 @@ Scripts
 .DS_Store
 .env
 GP_TAREFAS2/staticfiles
+.cache
