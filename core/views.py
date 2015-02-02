@@ -2,13 +2,14 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
-from core.decorators import render_to
+from core.decorators import render_to_response
 from django.conf import settings
 from social.backends.oauth import BaseOAuth1, BaseOAuth2
 from social.backends.google import GooglePlusAuth
 from social.backends.utils import load_backends
 from social.apps.django_app.utils import psa
 from profiles.models import UserProfile
+from django.contrib.auth import authenticate, login
 
 
 
@@ -31,10 +32,29 @@ def home(request):
     })
 
     if request.user.is_authenticated():
-        print request.user.userprofile.getProfilePicture()
+        return render(request, 'index.html', context_instance=userContext)
 
-    # print request.user['image']['url']
-    return render(request, 'index.html', context_instance=userContext)
+    return render(request, 'login.html')
+
+
+def login_user(request):
+    state = "Please log in below..."
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print("Autenticando....")
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                print("user active")
+                return render_to_response('index.html', user)
+            else:
+                print("user NOT active")
+                state = "Your username/password is incorrect"
+    return render_to_response('login.html', state)
+
 
 # @login_required(login_url='/login/google-oauth2/')
 # @render_to('index.html')
@@ -64,11 +84,25 @@ def tarefas(request):
     })
     return render(request, 'tarefas.html', context_instance=context)
 
-@login_required(login_url='/login/google-oauth2/')
-def smart_admin(request):
 
+@login_required(login_url='/login/google-oauth2/')
+def dashboard(request):
     userContext = RequestContext(request, {
         'user': request.user
     })
+    return render(request, 'dashboard.html',context_instance=userContext)
 
-    return render(request, 'smart_admin.html',context_instance=userContext)
+
+@login_required(login_url='/login/google-oauth2/')
+def inbox(request):
+    userContext = RequestContext(request, {
+        'user': request.user
+    })
+    return render(request, 'inbox.html',context_instance=userContext)
+
+@login_required(login_url='/login/google-oauth2/')
+def table(request):
+    userContext = RequestContext(request, {
+        'user': request.user
+    })
+    return render(request, 'table.html',context_instance=userContext)
