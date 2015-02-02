@@ -23,3 +23,9 @@ class UserProfile(models.Model):
 
     def getProfilePicture(self):
         return self.profile_photo
+
+    def getDisplayName(self):
+        if self.display_name:
+            return self.display_name
+        else:
+            return "%s %s (%s)" % (self.user.first_name, self.user.last_name, self.user.username)

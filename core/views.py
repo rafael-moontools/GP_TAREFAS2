@@ -57,9 +57,18 @@ def file_upload(request):
 
 
 
-@login_required
+@login_required(login_url='/login/google-oauth2/')
 def tarefas(request):
     context = RequestContext(request, {
         'user': request.user
     })
     return render(request, 'tarefas.html', context_instance=context)
+
+@login_required(login_url='/login/google-oauth2/')
+def smart_admin(request):
+
+    userContext = RequestContext(request, {
+        'user': request.user
+    })
+
+    return render(request, 'smart_admin.html',context_instance=userContext)
